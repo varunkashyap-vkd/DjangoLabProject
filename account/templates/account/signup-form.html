@@ -1,0 +1,13 @@
+{% extends 'common/base.html' %}
+{% load material_form %}
+{% load staticfiles %}
+
+{% block body %}
+<form action = "{% url 'signup' %}" method = "POST">
+	{% csrf_token %}
+	{% form form=form %}{% endform %}
+	<div class = "row">
+		<input type = "Submit" class = "waves-light btn waves-effect" value = "Signup">
+	</div>
+</form>
+{% endblock %}

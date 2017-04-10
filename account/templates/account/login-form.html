@@ -1,0 +1,16 @@
+{% extends 'common/base.html' %}
+{% load material_form %}
+{% load staticfiles %}
+
+{% block body %}
+<form action = "{% url 'root' %}" method = "POST">
+	{% csrf_token %}
+	{% form form=form %}{% endform %}
+	<div class = "row">
+		<input type = "Submit" class = "waves-light btn waves-effect">
+	</div>
+</form>
+
+<div><a href="{% url 'signup' %}">	New user ? Signup here.	</a></div>
+<div><a href="{% url 'forgot_password' %}">		Forgot Password	</a></div>
+{% endblock %}

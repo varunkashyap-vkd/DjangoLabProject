@@ -1,0 +1,91 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+{% block body %}
+
+<nav>
+	<div class="nav-wrapper">
+		<div class="brand-logo center-align">Hello {{ user.username }}</div>
+		<ul id="nav-mobile" class="right">
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+		</ul>
+	</div>
+</nav>
+
+<div class = "row"></div>
+
+<div class = "row">
+	<audio controls class = "col s12 m8 l6 offset-m2 offset-l3" id = "audio">
+		<source src = ""/>
+	</audio>
+
+	<div id = "currently-playing" class="col s12 m8 l6 offset-m2 offset-l3 center-align">	
+		Nothing to display
+	</div>
+</div>
+
+<div class = "row">
+	<div class = "col s12 m8 l6 input-field offset-m2 offset-l3">
+		<input id="song-field" type="text" class="validate">
+		<label for="song-field">Search a song ...</label>
+		<div id = "info-div" url title style = "cursor: pointer;" class="card-panel teal darken-4 white-text">	Result will be displayed here	</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class = "col s12 m8 l6 input-field offset-m2 offset-l3">
+		<div class="collection" id = "song-list">
+			{% for song in songs_list %}
+			<a href="" url = "{{ song.url }}" class="collection-item">
+				{{ song.title }}
+				<span class = "remove-button" url = "{{ song.url }}" title = "{{ song.title }}" class = "remove-button">	
+					Remove&nbsp<i class="fa fa-times" aria-hidden="true"></i>
+				</span>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.remove-button{
+		float: right;
+	}
+
+	.remove-button:hover{
+		color: red;
+	}
+</style>
+
+<script type="text/javascript" src = "{% static 'account/js/homepage.js' %}"></script>
+<script type="text/javascript">
+	var obj = {
+		'songField' : 'song-field',
+		'infoDiv' : 'info-div',
+		'songsList' : '#song-list > a',
+		'audio' : 'audio',
+		'currentlyPlaying' : 'currently-playing',
+		'removeButton' : 'remove-button',
+	};
+	homepage.init(obj);
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
