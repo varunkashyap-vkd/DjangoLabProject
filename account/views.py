@@ -101,13 +101,13 @@ def confirm(request, purpose, username, userID, code):
 	otpObject = models.OTP.objects.get(code = code)
 
 	if not user or not otpObject or int(user.id) != int(userID) or otpObject.user != user:
-		return HttpResponse('Trying to access something that doesnt exist.')
+		return HttpResponse(render(request, 'common/message.html', {'message' : 'Trying to access something that does not exist.'}))
 
 	if otpObject.purpose == 'AA':
 		user.is_active = True
 		user.save()
 		otpObject.delete()
-		return HttpResponse('Verification complete.')
+		return HttpResponse(render(request, 'common/message.html', {'message' : 'Verification Complete.'}))
 
 	else:
 		if request.method == 'GET':

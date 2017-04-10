@@ -59,10 +59,10 @@ class SignupForm(forms.Form):
 			raise forms.ValidationError('Email already registered')
 		return email
 
-	def clean_password(self):
+	def clean(self):
 		password = self.cleaned_data['password']
-		confirm_password = self.cleaned_data['confirm_password']
+		confirm_password = self.cleaned_data.get('confirm_password')
 
 		if password != confirm_password:
 			raise forms.ValidationError('Two passwords do not match')
-		return password
+		return self.cleaned_data
