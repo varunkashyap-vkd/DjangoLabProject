@@ -84,7 +84,8 @@ def signup(request):
 	subject = 'Verify your account'
 	sender = settings.EMAIL_HOST_USER
 	recipient_email = email
-	content = 'localhost:8000/account/confirm/AA/' + username + '/' + str(user.id) + '/' + str(otp)
+	link = 'localhost:8000/account/confirm/AA/' + username + '/' + str(user.id) + '/' + str(otp)
+	content = loader.render_to_string('account/sentMail-aa.html', {'link' : link})
 
 	message = EmailMultiAlternatives(subject, content, sender, [recipient_email])
 	message.send()
@@ -159,11 +160,11 @@ def forgot_password(request):
 	targetUser = models.CustomUser.objects.get(username = form.cleaned_data['username'])
 	recipient_email = targetUser.email
 	sender = settings.EMAIL_HOST_USER
-	subject = 'Forgot Password On Our Website.'
+	subject = 'Forgot Password'
 
 	otp = models.createOTP(targetUser, 'FP')
-	content = 'localhost:8000/account/confirm/FP/' + targetUser.username + '/' + str(targetUser.id) + '/' + str(otp)
-
+	link = 'localhost:8000/account/confirm/FP/' + targetUser.username + '/' + str(targetUser.id) + '/' + str(otp)
+	content = text_message = loader.render_to_string('account/sentMail-fp.html', {'link' : link})
 	message = EmailMultiAlternatives(subject, content, sender, [recipient_email])
 	message.send()
 
