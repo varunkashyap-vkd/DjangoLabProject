@@ -25,7 +25,7 @@ SECRET_KEY = '4pr5p4+=m+xpj-mqfbb*c5i9j=iu77i-*eec$u6e)zl+je2y-b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['teamdefianzracing.in']
 
 
 # Application definition
